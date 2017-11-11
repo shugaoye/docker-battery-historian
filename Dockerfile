@@ -1,7 +1,8 @@
-FROM golang:latest
+FROM golang:1.9.2-stretch
 MAINTAINER shugaoye@yahoo.com
 
-COPY scripts/sources.list /etc/apt/sources.list
+# Only use this for the local build
+# COPY scripts/sources.list /etc/apt/sources.list
 
 RUN apt-get -y update && apt-get install -y openjdk-8-jre
 
