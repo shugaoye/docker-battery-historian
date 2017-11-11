@@ -26,8 +26,8 @@
 # Both can be defined in your environment, otherwise the below default values
 # will be used.
 
-TAG_NAME ?= latest
-VERSION ?= v1
+TAG_NAME ?= gcr.io
+VERSION ?= v3.0
 DOCKER = docker
 IMAGE = shugaoye/docker-battery-historian:$(TAG_NAME)
 VOL1 ?= $(HOME)/vol1
