@@ -26,7 +26,7 @@
 # Both can be defined in your environment, otherwise the below default values
 # will be used.
 
-TAG_NAME ?= latest
+TAG_NAME ?= console
 VERSION ?= v1
 DOCKER = docker
 IMAGE = shugaoye/docker-battery-historian:$(TAG_NAME)
@@ -42,8 +42,9 @@ new: Dockerfile
 	$(DOCKER) build --no-cache -t $(IMAGE) .
 
 run:
-	$(DOCKER) run --privileged --name "$(TAG_NAME)_$(VERSION)" -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v "$(VOL1):/home/aosp" \
+	$(DOCKER) run --privileged --name "$(TAG_NAME)_$(VERSION)" \
+	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -v "$(VOL1):/home/aosp" \
 	-v "$(VOL2):/tmp/ccache" -it -e DISPLAY=$(DISPLAY) -e USER_ID=$(USER_ID) -e GROUP_ID=$(GROUP_ID) \
-	$(IMAGE) /bin/bash
+	 $(IMAGE) /bin/bash
 
 
