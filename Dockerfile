@@ -1,7 +1,12 @@
 FROM golang:latest
 MAINTAINER shugaoye@yahoo.com
 
-RUN apt-get -y update && apt-get install -y openjdk-7-jre-headless
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:openjdk-r/ppa
+RUN apt-get update && \
+    apt-get install -y openjdk-7-jdk && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN go get -d -u github.com/google/battery-historian
 WORKDIR /go/src/github.com/google/battery-historian
