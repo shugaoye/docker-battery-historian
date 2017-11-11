@@ -1,13 +1,8 @@
-FROM golang:latest
+FROM gcr.io/android-battery-historian/stable:3.0
 MAINTAINER shugaoye@yahoo.com
 
-RUN apt-get update && \
-    apt-get install -y openjdk-7-jdk && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+COPY utils/bash.bashrc /root/bash.bashrc
+RUN chmod 755 /root /root/bash.bashrc
+COPY utils/docker_entrypoint.sh /root/docker_entrypoint.sh
+ENTRYPOINT ["/root/docker_entrypoint.sh"]
 
-RUN go get -d -u github.com/google/battery-historian
-WORKDIR /go/src/github.com/google/battery-historian
-RUN go run setup.go
-
-EXPOSE 9999
-CMD go run cmd/battery-historian/battery-historian.go --port 9999
