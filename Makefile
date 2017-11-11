@@ -26,8 +26,8 @@
 # Both can be defined in your environment, otherwise the below default values
 # will be used.
 
-TAG_NAME ?= console
-VERSION ?= v1
+TAG_NAME ?= stretch_JDK8
+VERSION ?= v2
 DOCKER = docker
 IMAGE = shugaoye/docker-battery-historian:$(TAG_NAME)
 VOL1 ?= $(HOME)/vol1
@@ -41,10 +41,14 @@ all: Dockerfile
 new: Dockerfile
 	$(DOCKER) build --no-cache -t $(IMAGE) .
 
+# Need to change to the below command line
+# docker run --name "docker-battery-historian" -it -p 9999:9999 shugaoye/docker-battery-historian:latest /bin/bash
+# cd /go/src/github.com/google/battery-historian
+# go run cmd/battery-historian/battery-historian.go
 run:
-	$(DOCKER) run --privileged --name "$(TAG_NAME)_$(VERSION)" \
+	$(DOCKER) run --name "$(TAG_NAME)_$(VERSION)" \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -v "$(VOL1):/home/aosp" \
 	-v "$(VOL2):/tmp/ccache" -it -e DISPLAY=$(DISPLAY) -e USER_ID=$(USER_ID) -e GROUP_ID=$(GROUP_ID) \
-	 $(IMAGE) /bin/bash
+	-p 9999:9999 -p 23:22 $(IMAGE) /bin/bash
 
 

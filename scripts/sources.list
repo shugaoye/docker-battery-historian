@@ -1,4 +1,4 @@
 deb http://mirrors.163.com/debian stretch main
-deb http://mirrors.163.com/debian stretch-updates main
-deb http://mirrors.163.com/debian-security/ stretch/updates main
+deb http://deb.debian.org/debian stretch-updates main
+deb http://security.debian.org stretch/updates main
 
