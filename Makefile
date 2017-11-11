@@ -26,7 +26,7 @@
 # Both can be defined in your environment, otherwise the below default values
 # will be used.
 
-TAG_NAME ?= abh
+TAG_NAME ?= latest
 VERSION ?= v1
 DOCKER = docker
 IMAGE = shugaoye/docker-battery-historian:$(TAG_NAME)
